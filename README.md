@@ -1,0 +1,2 @@
+- Main scripts: bitnode-start.js, gang.js, stonks.js, hackZaWarudo.js and shareStart.js
+- Helper scripts: early-hack-template.js, zaWarudoGrow.js, zaWarudoHack.js, zaWarudoWeaken.js and threadedShare.js
