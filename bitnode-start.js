@@ -1,3 +1,5 @@
+/** Repeatingly scans all servers and hacks whats possible to run the basic 'early-hack-template.js' on the targets. */
+
 /** @param {NS} ns */
 export async function main(ns) {
     ns.disableLog("sleep");

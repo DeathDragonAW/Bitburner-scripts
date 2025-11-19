@@ -1,3 +1,5 @@
+/** Uses percentage of total RAM ('limitRam') and fills it with hack, grow and weaken scripts on available targets which fit the 'minServerMoney' requirement. */
+
 /** @param {NS} ns */
 export async function main(ns) {
 

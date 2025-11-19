@@ -1,3 +1,5 @@
+/** Script currently is 100% copy-paste from chatGPT, seems to work good and had no reason to dive into this rabbithole yet. */
+
 /** @param {NS} ns */
 export async function main(ns) {
     ns.disableLog("sleep");

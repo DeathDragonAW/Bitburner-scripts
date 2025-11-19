@@ -1,3 +1,5 @@
+/** Start right after gang has been created, needs around 30gb of RAM. Will take care of training, equipment and territory. Had no reason to implement wanted level reduction as the penalty goes close towards 0 over time anyway. Logs will show member assignments, ascensions and equipment purchases. */
+
 /** @param {NS} ns */
 export async function main(ns) {
     ns.disableLog("sleep");

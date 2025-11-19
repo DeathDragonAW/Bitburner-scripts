@@ -1,3 +1,5 @@
+/** Shares all currently available RAM on 'home' for bonus with factions. */
+
 /** @param {NS} ns */
 export async function main(ns) {
     ns.disableLog("sleep");

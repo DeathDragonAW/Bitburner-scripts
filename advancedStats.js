@@ -1,3 +1,5 @@
+/** This is currently more of a construction site. */
+
 /** @param {NS} ns **/
 export async function main(ns) {
     // Config zone
