@@ -3,8 +3,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-    const threadsMultiplier = Math.floor(
-        (ns.getServerMaxRam(ns.getHostname()) ^ 0.666) / (1024));
+    const threadsMultiplier = Math.floor((ns.getServerMaxRam(ns.getHostname()) ^ 0.666) / (1024));
     const hackThreads = Math.max(1, 1 * threadsMultiplier);
     const growThreads = Math.max(10, 10 * threadsMultiplier);
     const weakenThreads = Math.max(2, 2 * threadsMultiplier);
