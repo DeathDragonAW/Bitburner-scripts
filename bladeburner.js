@@ -27,7 +27,10 @@ export async function main(ns) {
         return ns.bladeburner.getActionCountRemaining(type, name);
     }
     function startAction(type, name) {
-        const currentAction = ns.bladeburner.getCurrentAction().name;
+        let currentAction = "";
+        if (ns.bladeburner.getCurrentAction() != null) {
+            currentAction = ns.bladeburner.getCurrentAction().name;
+        }
         if (name != currentAction) ns.bladeburner.startAction(type, name);
     }
 
@@ -70,7 +73,7 @@ export async function main(ns) {
     /** Do next black operation if chance is high enough */
     function blackOpsDoable() {
         NEXT_BLACK_OP = ns.bladeburner.getNextBlackOp().name;
-        if (getActionChance("Black Operations", NEXT_BLACK_OP) >= MIN_CHANCE) { return true; }
+        if (getActionChance("Black Operations", NEXT_BLACK_OP) >= MIN_CHANCE) return true;
         else ns.print('INFO: Chance for next Black Op too low!');
     }
     function doBlackOps() {
@@ -93,6 +96,7 @@ export async function main(ns) {
             }
         })
         if (DOABLE_OPERATION != "") return true;
+        else ns.print('INFO: Chance for Operations too low!')
     }
     function doOperations() {
         startAction("Operations", DOABLE_OPERATION);
@@ -104,13 +108,14 @@ export async function main(ns) {
     function contractsDoable() {
         DOABLE_CONTRACT = "";
         SAFE_CONTRACTS.forEach((contract) => {
-            if (getActionCount("Contract", contract) >= MIN_COUNT &&
-                getActionChance("Operations", contract) >= MIN_CHANCE) {
+            if (getActionCount("Contracts", contract) >= MIN_COUNT &&
+                getActionChance("Contracts", contract) >= MIN_CHANCE) {
                 DOABLE_CONTRACT = contract;
                 return;
             }
         })
         if (DOABLE_CONTRACT != "") return true;
+        else ns.print('INFO: Chance for Contrats too low!')
     }
     function doContracts() {
         startAction("Contracts", DOABLE_CONTRACT);
@@ -119,10 +124,10 @@ export async function main(ns) {
 
     /** Increase accuracy if estamination too low */
     function estimationLow() {
-        actionName = SAFE_CONTRACTS[1].name;
-        chanceRange = ns.bladeburner.getActionEstimatedSuccessChance("Contracts", actionName);
-        rangeDifference = Math.abs(chanceRange[0] - chanceRange[1]);
+        const chanceRange = ns.bladeburner.getActionEstimatedSuccessChance("Contracts", SAFE_CONTRACTS[0]);
+        const rangeDifference = Math.abs(chanceRange[0] - chanceRange[1]);
         if (rangeDifference > MIN_RANGE) return true;
+        else ns.print('INFO: Populations estamination is accurate.')
     }
     function doFieldAnalysis() {
         startAction("General", "Field Analysis");
@@ -132,12 +137,12 @@ export async function main(ns) {
     /** Start training as last resort, if all other requirements are not met */
     function doTraining() {
         startAction("General", "Training");
+        ns.print('INFO: Falling back to training.')
     }
 
 
     /** Main repeating loop */
     while (true) {
-        ns.print(operationsDoable());
         if (w0r1d_d43m0nHackable()) hackW0r1d_d43m0n();
         else if (skillsUpgradable()) upgradeSkills();
         else if (betterCityAvailable()) changeCity();
